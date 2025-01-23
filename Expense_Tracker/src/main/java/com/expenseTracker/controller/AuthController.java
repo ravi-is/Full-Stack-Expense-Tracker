@@ -26,7 +26,7 @@ public class AuthController {
     public ResponseEntity<String> signup(@RequestBody UserDTO userDTO) {
         User user = new User();
         user.setUsername(userDTO.getUsername());
-        user.setPassword(userDTO.getPassword()); // Password hashing to be added
+        user.setPassword(userDTO.getPassword());
         userService.saveUser(user);
         return ResponseEntity.ok("User registered successfully");
     }
@@ -34,7 +34,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserDTO userDTO) {
         Optional<User> user = userService.findByUsername(userDTO.getUsername());
-        if (user.isPresent() && user.get().getPassword().equals(userDTO.getPassword())) { // Replace with password validation
+        if (user.isPresent() && user.get().getPassword().equals(userDTO.getPassword())) { 
             return ResponseEntity.ok("Login successful");
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
